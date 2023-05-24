@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Read user input and store in variable
+echo "Enter your name:"
+read name
+
+# Print user input variable
+echo "Your name is: $name"
+
+# Print variable passed as argument
+echo "The first argument is: $1"
+
+# Print all arguments echo
+echo "All arguments are: $@"
+echo "$*"
+echo "number of arguments: $#"
+echo "filename from  the command line: $0"
+# Exit the script
+exit 0
