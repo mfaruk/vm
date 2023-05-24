@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Assign values to variables
 num1=10
 num2=5
