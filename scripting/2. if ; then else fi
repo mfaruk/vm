@@ -1,0 +1,11 @@
+#!/bin/bash
+# Assign values to variables
+num1=10
+num2=5
+
+# Compare the two numbers
+if [ $num1 -gt $num2 ]; then
+  echo "$num1 is greater than $num2"
+else
+  echo "$num2 is greater than or equal to $num1"
+fi
