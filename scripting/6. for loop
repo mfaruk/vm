@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# a) regular for loop : c language type
+
+for (( c=1; c<=5; c++ ))
+do
+echo “Welcome $c times…”
+done
+
+# b) for  each loop using range {1..5}
+for c in {1..5}
+do
+echo " number : $c"
+done
+
+# c ) for each loop using range with increment {1..15..3}
+echo "Bash version ${BASH_VERSION}..."
+for c in {1..15..3}
+do
+echo " number increment by 3 : $c"
+done
+
+
+# d) print all the files and  folder under /etc/ directory.
+for file in /etc/*
+do
+ echo $file  | awk -F "/" '{ print $3 }'
+#  echo $file | cut -d"/" -f 3
+
+done
+
+# e) Make backup of all file names specified on command line. If .bak file exists, it will skip the cp command.
+FILES="$@"
+for f in $FILES
+do
+        # if .bak backup file exists, read next file
+    if [ -f ${f}.bak ]
+    then
+        echo "Skiping $f file..."
+        continue  # read next file and skip the cp command
+    fi
+        # we are here means no backup file exists, just use cp command to copy file
+    /bin/cp $f $f.bak
+done
+
+
+# f) Set three aws zones to create VM  instances
+#  values are seperated by space.
+AWS_ZONE=('us-east-2a' 'us-west-1a' 'eu-central-1a')
+
+for zone in "${AWS_ZONE[@]}"
+do
+  echo "Creating VM  server in $zone, please wait ..."
+done
+
+# g ) command substitution in for loop
+for f in $(ls /etc/*.conf)
+do
+  echo "File $f"
+done
+
+# To run a simple command (such as uptime) on multiple Linux or Unix servers:
+# password requied twice
+for s in master  master
+do
+    ssh vagrant@${s} "uptime"
+done
