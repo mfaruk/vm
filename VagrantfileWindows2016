@@ -1,0 +1,28 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.box_download_insecure=true
+  # Box
+  config.vm.box = "jacqinthebox/windowsserver2016"
+
+  # Additional parameters to communicate with Windows
+  config.vm.boot_timeout = 60
+  config.vm.communicator = "winrm"
+  config.winrm.port = 55985
+
+  # Customization
+  config.vm.provider "virtualbox" do |v|
+    v.name = "windows"
+    v.gui = true
+    v.memory = 4096
+    v.customize ["modifyvm", :id, "--draganddrop", "hosttoguest"] # Enables drag-and-drop between host and guest
+  end
+  # config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network "forwarded_port" , host: 33390 , guest: 3389
+  config.vm.network "private_network", ip: "192.168.160.12" 
+
+
+  # Provisioning
+  # config.vm.provision "shell", path: "scripts/InstallChocolatey.ps1"
+  # config.vm.provision "shell", inline: "choco install vscode --yes"
+
+end
